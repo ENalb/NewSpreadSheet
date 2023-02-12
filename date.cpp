@@ -5,8 +5,8 @@ Date::Date(int y, int m, int d) : year{y}, month{m}, day{d} {}
 
 Date Date::toDate(const std::string& v){
 	int year, month, day;
-    sscanf(v.c_str(), "%d/%d/%d", &year, &month, &day);
-    return Date(year, month, day);
+    	sscanf(v.c_str(), "%d/%d/%d", &year, &month, &day);
+    	return Date(year, month, day);
 }
 
 void Date::setYear(int y)
