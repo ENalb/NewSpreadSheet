@@ -1,11 +1,6 @@
 #include <string>
 #include <vector>
-#include <memory>
 #include "cell.h"
-// #include "intcell.h"
-// #include "doublecell.h"
-// #include "stringcell.h"
-// #include "datecell.h"
 
 class Spreadsheet{
 public:
