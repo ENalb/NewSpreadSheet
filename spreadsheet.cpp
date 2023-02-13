@@ -7,7 +7,7 @@ Spreadsheet::Spreadsheet(int r, int c) : row{r}, column{c}
 {
 	m_cells.resize(row);
 	for (int i = 0; i < r; ++i) {
-    	m_cells[i].resize(column);
+    		m_cells[i].resize(column);
   	}
 }
 
@@ -28,7 +28,8 @@ void Spreadsheet::printSheet()
 			Cell* cell = getCellAt(i, j);
 			if (cell) {
 				std::cout << cell->getStringValue() << " ";
-			} else {
+			} 
+			else {
 				std::cout << "0 ";
 			}
 		}
@@ -50,7 +51,7 @@ Cell* Spreadsheet::getCellAt(int r, int c)
 void Spreadsheet::setCellAt(int r, int c, const std::string& value)
 {
 	StringCell* stringCell = new StringCell(value, Color::blue);
-    m_cells[r][c] = stringCell;
+    	m_cells[r][c] = stringCell;
 }
 
 void Spreadsheet::addRow(int r, const std::vector<Cell*>& vec)
@@ -70,11 +71,12 @@ void Spreadsheet::addColumn(int c, const std::vector<Cell*>& vec)
 	int rows = vec.size();
 	for (int i = 0; i < row; i++) {
 		m_cells[i].resize(column + 1);
-        if (i < rows) {
-            m_cells[i][c] = vec[i];
-        } else {
-            m_cells[i][c] = nullptr;
-        }
+        	if (i < rows) {
+            		m_cells[i][c] = vec[i];
+        	} 
+		else {
+            		m_cells[i][c] = nullptr;
+        	}
 	}
 	++column;
 }
@@ -82,55 +84,55 @@ void Spreadsheet::addColumn(int c, const std::vector<Cell*>& vec)
 void Spreadsheet::removeColumn(int c)
 {
 	int rows = m_cells.size();
-    int cols = m_cells[0].size();
-    for (int i = 0; i < rows; ++i) {
-        for (int j = c; j < cols - 1; ++j) {
-            m_cells[i][j] = m_cells[i][j+1];
-        }
-        m_cells[i].resize(cols - 1);
-    }
-    --column;
+    	int cols = m_cells[0].size();
+    	for (int i = 0; i < rows; ++i) {
+        	for (int j = c; j < cols - 1; ++j) {
+            		m_cells[i][j] = m_cells[i][j+1];
+        	}
+        	m_cells[i].resize(cols - 1);
+    	}
+    	--column;
 }
 
 void Spreadsheet::swapRows(int r1, int r2)
 {
 	std::vector<Cell*> temp = m_cells[r1];
-    m_cells[r1] = m_cells[r2];
-    m_cells[r2] = temp;
+    	m_cells[r1] = m_cells[r2];
+    	m_cells[r2] = temp;
 }
 
 void Spreadsheet::swapColumns(int c1, int c2)
 {
 	int rows = m_cells.size();
-    for (int i = 0; i < rows; ++i) {
-        Cell* temp = m_cells[i][c1];
-        m_cells[i][c1] = m_cells[i][c2];
-        m_cells[i][c2] = temp;
-    }
+    	for (int i = 0; i < rows; ++i) {
+		Cell* temp = m_cells[i][c1];
+		m_cells[i][c1] = m_cells[i][c2];
+		m_cells[i][c2] = temp;
+    	}
 }
 
 void Spreadsheet::writeCoordinatesToFile()
 {
 	std::string filename = "coordinates.txt";
 
-    std::ofstream file(filename);
+    	std::ofstream file(filename);
 
-    int rowCount = m_cells.size();
-    int columnCount = m_cells[0].size();
+    	int rowCount = m_cells.size();
+    	int columnCount = m_cells[0].size();
 
-    for (int i = 0; i < rowCount; i++)
-    {
-        for (int j = 0; j < columnCount; j++)
-        {
-        	Cell* cell = getCellAt(i, j);
-			if (cell) {
-				file << "(" << i << ";" << j << ") = " << cell->getStringValue() << "\n";
-			} 
-			else {
-				file << "(" << i << ";" << j << ") = " << m_cells[i][j] << "\n";
-			}
-        }
-    }
+    	for (int i = 0; i < rowCount; i++)
+    	{
+		for (int j = 0; j < columnCount; j++)
+		{
+			Cell* cell = getCellAt(i, j);
+				if (cell) {
+					file << "(" << i << ";" << j << ") = " << cell->getStringValue() << "\n";
+				} 
+				else {
+					file << "(" << i << ";" << j << ") = " << m_cells[i][j] << "\n";
+				}
+		}
+    	}
 
-    file.close();
+    	file.close();
 }
